@@ -84,6 +84,8 @@ Die aktuellen Testdetails und verbliebenen Windows-Prüfungen stehen in `docs/VA
 - Die Tests mussten auf normale PDF-Zeilenumbrüche, gerundete A4-Maße und den asynchronen Editorfokus reagieren. Diese Korrekturen sind Testpräzisierungen, keine nachträglich behaupteten Programmerfolge.
 - Der Standard-NSIS-Build benötigte Wine. Das nachgeladene Wine-Bundle scheiterte beim Laden von `ntdll.dll`. Ein eigenes NSIS-Skript erzeugt den Deinstaller erst bei der Installation und vermeidet diesen Laufzeitbedarf beim Cross-Build. Die Sprachkonfiguration wurde auf Deutsch eingegrenzt, nachdem NSIS fehlende zusätzliche Sprachtexte beanstandet hatte.
 
+- Beim späteren nativen Windows-Build über GitHub Actions scheiterte NSIS an gemischten Linux-/Windows-Pfadtrennern. Das Installer-Skript wählt nun mit dem dokumentierten Makro `NSIS_WIN32_MAKENSIS` die zum Buildsystem passenden Pfade.
+
 ## 7. Beitrag der KI und verbleibende Grenzen
 
 Die KI übernahm Werkzeugprüfung, Eingrenzung, REA-Aufrufe, Codelektüre, Architekturentwurf, Implementierung, Testautomatisierung, Fehlerdiagnose und Dokumentation. Manuell wären dafür Paket- und API-Recherche, UI-Programmierung, Editorintegration, Dateikonverter, Buildskripte und einzelne Testläufe erforderlich gewesen. Die Zeitersparnis wurde nicht gemessen; eine Prozentangabe wäre erfunden.

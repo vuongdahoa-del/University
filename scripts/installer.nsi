@@ -3,6 +3,13 @@
 !include "MUI2.nsh"
 !include "LogicLib.nsh"
 !include "x64.nsh"
+!ifdef NSIS_WIN32_MAKENSIS
+  !define BD_PACKAGE_FILES "${PROJECT_DIR}\release\win-unpacked\*"
+  !define BD_UNINSTALL_FILES "${PROJECT_DIR}\release\uninstall-files.nsh"
+!else
+  !define BD_PACKAGE_FILES "${PROJECT_DIR}/release/win-unpacked/*"
+  !define BD_UNINSTALL_FILES "${PROJECT_DIR}/release/uninstall-files.nsh"
+!endif
 Name "B&D Word"
 InstallDir "$LOCALAPPDATA\Programs\BDWord"
 RequestExecutionLevel user
@@ -24,7 +31,7 @@ FunctionEnd
 Section "B&D Word"
   SetShellVarContext current
   SetOutPath "$INSTDIR"
-  File /r "${PROJECT_DIR}/release/win-unpacked/*"
+  File /r "${BD_PACKAGE_FILES}"
   WriteUninstaller "$INSTDIR\Uninstall.exe"
   CreateShortcut "$DESKTOP\B&D Word.lnk" "$INSTDIR\B&D Word.exe" "" "$INSTDIR\B&D Word.exe" 0
   CreateShortcut "$SMPROGRAMS\B&D Word.lnk" "$INSTDIR\B&D Word.exe" "" "$INSTDIR\B&D Word.exe" 0
@@ -38,7 +45,7 @@ Section "Uninstall"
   Delete "$DESKTOP\B&D Word.lnk"
   Delete "$SMPROGRAMS\B&D Word.lnk"
   ; Generated from the packaged file inventory. Unknown user files stay intact.
-  !include "${PROJECT_DIR}/release/uninstall-files.nsh"
+  !include "${BD_UNINSTALL_FILES}"
   Delete "$INSTDIR\Uninstall.exe"
   RMDir "$INSTDIR"
   DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\BDWord"
