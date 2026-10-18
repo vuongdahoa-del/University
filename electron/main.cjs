@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 let win, dirty = false, allowedClose = false;
@@ -21,7 +21,12 @@ async function printable(html) {
 }
 app.whenReady().then(()=>{
   win=new BrowserWindow({width:1440,height:1000,minWidth:1060,minHeight:720,frame:false,backgroundColor:'#f2f4f7',icon:path.join(__dirname,'../assets/icon.png'),webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true}});
-  win.setMenu(null);
+  if(process.platform==='darwin'){
+    Menu.setApplicationMenu(Menu.buildFromTemplate([
+      {role:'appMenu'},
+      {label:'Bearbeiten',submenu:[{role:'cut'},{role:'copy'},{role:'paste'},{role:'selectAll'}]}
+    ]));
+  }else{win.setMenu(null);}
   win.webContents.setWindowOpenHandler(()=>({action:'deny'}));
   win.webContents.on('will-navigate',e=>e.preventDefault());
   win.on('close',e=>{if(dirty && !allowedClose){e.preventDefault();win.webContents.send('request-close');}});

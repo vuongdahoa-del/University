@@ -15,7 +15,8 @@
     "dist:win": "npm run build && electron-builder --win zip nsis --x64 --publish never",
     "dist:linux": "npm run build && electron-builder --linux dir",
     "dist:win:zip": "npm run build && electron-builder --win zip --x64 --publish never",
-    "analyze": "node scripts/analyze-rea.mjs"
+    "analyze": "node scripts/analyze-rea.mjs",
+    "dist:mac": "npm run build && electron-builder --mac zip --universal --publish never"
   },
   "dependencies": {
     "@tiptap/extension-character-count": "^3.0.0",
@@ -95,6 +96,19 @@
         "from": "docs/THIRD_PARTY_NOTICES.txt",
         "to": "THIRD_PARTY_NOTICES.txt"
       }
-    ]
+    ],
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon-mac.png",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "notarize": false,
+      "minimumSystemVersion": "11.0",
+      "artifactName": "BD-Word-${version}-mac-universal.zip"
+    }
   }
 }

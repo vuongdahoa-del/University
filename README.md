@@ -74,3 +74,7 @@ Die Toolversionen sind separat gesperrt. Das Skript untersucht einen unveränder
 - [Zweiminütige Live-Demo und Windows-Checkliste](docs/LIVE_DEMO.md)
 - [Validierung und offene Plattformtests](docs/VALIDIERUNG.md)
 - [Fremdsoftware-Lizenzen](docs/THIRD_PARTY_NOTICES.txt)
+
+## macOS-Version
+
+Die Universal-App für Intel und Apple Silicon wird separat auf dem Branch `bd-word-macos-v1.0.0` gebaut und als `BD-Word-1.0.0-mac-universal.zip` zum vorhandenen GitHub-Release hinzugefügt. Die Windows-Downloads bleiben erhalten. Auf einem Mac lässt sie sich mit `npm run dist:mac` bauen; der paketierte Editor wird mit `node scripts/smoke-macos.cjs` geprüft. Details zu Entpacken, Öffnen, Signatur und Testgrenzen stehen in [MACOS.md](docs/MACOS.md).

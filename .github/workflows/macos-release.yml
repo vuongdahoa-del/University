@@ -1,0 +1,52 @@
+name: Build and publish B&D Word for macOS
+
+on:
+  push:
+    branches: [bd-word-macos-v1.0.0]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  macos-release:
+    runs-on: macos-14
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build universal macOS application
+        run: npm run dist:mac
+      - name: Verify both architectures and ad-hoc signature
+        shell: bash
+        run: |
+          set -euo pipefail
+          bd_binary='release/mac-universal/B&D Word.app/Contents/MacOS/B&D Word'
+          bd_archs=$(lipo -archs "$bd_binary")
+          echo "$bd_archs"
+          [[ "$bd_archs" == *x86_64* && "$bd_archs" == *arm64* ]]
+          codesign --verify --deep --strict --verbose=2 'release/mac-universal/B&D Word.app'
+      - name: Exercise packaged macOS editor
+        run: node scripts/smoke-macos.cjs
+      - name: Prepare macOS checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd release
+          shasum -a 256 BD-Word-1.0.0-mac-universal.zip > SHA256SUMS-MACOS.txt
+      - name: Add macOS download to existing release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload bd-word-v1.0.0 --repo "$GITHUB_REPOSITORY" release/BD-Word-1.0.0-mac-universal.zip release/SHA256SUMS-MACOS.txt
+      - name: Retain macOS smoke-test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-smoke-results
+          path: mac-smoke-results/
+          if-no-files-found: ignore
