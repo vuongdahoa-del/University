@@ -86,6 +86,8 @@ Die aktuellen Testdetails und verbliebenen Windows-Prüfungen stehen in `docs/VA
 
 - Beim späteren nativen Windows-Build über GitHub Actions scheiterte NSIS an gemischten Linux-/Windows-Pfadtrennern. Das Installer-Skript wählt nun mit dem dokumentierten Makro `NSIS_WIN32_MAKENSIS` die zum Buildsystem passenden Pfade.
 
+- Der nächste Windows-Lauf erstellte ZIP und Installer erfolgreich, scheiterte aber danach an Electron Builders automatischer Veröffentlichungslogik ohne `GH_TOKEN`. Die Paketbefehle verwenden nun `--publish never`; ausschließlich der separate GitHub-Actions-Schritt lädt mit dem für diesen Zweck bereitgestellten `github.token` hoch.
+
 ## 7. Beitrag der KI und verbleibende Grenzen
 
 Die KI übernahm Werkzeugprüfung, Eingrenzung, REA-Aufrufe, Codelektüre, Architekturentwurf, Implementierung, Testautomatisierung, Fehlerdiagnose und Dokumentation. Manuell wären dafür Paket- und API-Recherche, UI-Programmierung, Editorintegration, Dateikonverter, Buildskripte und einzelne Testläufe erforderlich gewesen. Die Zeitersparnis wurde nicht gemessen; eine Prozentangabe wäre erfunden.
