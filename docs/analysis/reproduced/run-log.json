@@ -1,0 +1,33 @@
+[
+  {
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/University/analysis-tools/node_modules/rea-agents/scripts/rea.mjs",
+      "--version"
+    ],
+    "exit": 0,
+    "output": "version.txt"
+  },
+  {
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/University/analysis-tools/node_modules/rea-agents/scripts/rea.mjs",
+      "analyze-javascript-application",
+      "/workspace/University/analysis-tools/.reference",
+      "--json"
+    ],
+    "exit": 0,
+    "output": "focused-analysis.json"
+  },
+  {
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/University/analysis-tools/node_modules/rea-agents/scripts/rea.mjs",
+      "trace-application-feature",
+      "/workspace/University/docs/analysis/reproduced/trace-input.json",
+      "--json"
+    ],
+    "exit": 0,
+    "output": "focused-trace.json"
+  }
+]

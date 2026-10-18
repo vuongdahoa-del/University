@@ -1,0 +1,3 @@
+import {Node, Extension} from '@tiptap/core';
+export const PageBreak=Node.create({name:'pageBreak',group:'block',atom:true,addKeyboardShortcuts(){return {'Mod-Enter':()=>this.editor.chain().insertContent([{type:'pageBreak'},{type:'paragraph'}]).run()};},parseHTML(){return [{tag:'hr[data-page-break]'}];},renderHTML(){return ['hr',{'data-page-break':'true'}];}});
+export const Indent=Extension.create({name:'indent',addGlobalAttributes(){return [{types:['paragraph','heading'],attributes:{indent:{default:0,parseHTML:e=>Math.min(8,Math.max(0,parseInt(e.style.marginLeft)/24||0)),renderHTML:a=>a.indent?{style:`margin-left:${Math.min(8,Math.max(0,Number(a.indent)||0))*24}px`}:{}}}}];}});

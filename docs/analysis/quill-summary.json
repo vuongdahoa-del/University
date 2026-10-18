@@ -1,0 +1,155 @@
+{
+  "REA_version": "6.5.0",
+  "Quill_version": "2.0.3",
+  "evidence_id": "ev_497933d3bd61bf57a2b2e6a11e6924f9ee4976704e6f0d482396bacd6d6cc2bb",
+  "root_sha256": "1f98ecd75716d7ff815b53aca50b2cfaa817a551f2372a09b772623d364ec77a",
+  "bold_module_observations": [
+    {
+      "node_id": "jag_node_87a6d60d422a0e4fbe2394daf3b469806dc0bd198a8957c68289a6361fba4001",
+      "kind": "javascript-asset",
+      "identity": {
+        "strategy": "content-digest",
+        "stability": "global-exact",
+        "sha256": "634e58c16d9bea08058c1738420165724af8223318fd747a5a0fcdab436ec0e5"
+      },
+      "observations": [
+        {
+          "label": "formats/bold.js",
+          "source_map_reference": null,
+          "properties": {
+            "path": "formats/bold.js",
+            "bytes": 449,
+            "inventory_artifact_id": "art_5db512933bdc5d802651efeac1f3fd3bc2bb17da304f8184698fa617e1748f38",
+            "unpacked": false,
+            "file_kind": "javascript",
+            "text_status": "included",
+            "parse_status": "complete",
+            "json_parse_status": null,
+            "json_top_level_keys": [],
+            "omitted_json_top_level_keys": 0,
+            "vendor_markers": []
+          },
+          "evidence": {
+            "authority": "artifact-bytes",
+            "state": "observed",
+            "confidence": "exact",
+            "artifact": {
+              "available": true,
+              "artifact_id": "art_634e58c16d9bea08058c1738420165724af8223318fd747a5a0fcdab436ec0e5",
+              "sha256": "634e58c16d9bea08058c1738420165724af8223318fd747a5a0fcdab436ec0e5"
+            },
+            "location": {
+              "available": true,
+              "value": {
+                "kind": "artifact-path",
+                "path": "formats/bold.js"
+              }
+            },
+            "extractor": {
+              "name": "rea-javascript-artifact-reconstruction",
+              "version": "1",
+              "operation": "inventory-relevant-file",
+              "executable_sha256": null
+            },
+            "coverage": {
+              "status": "complete",
+              "truncated": false,
+              "omitted_count": 0,
+              "limits": []
+            },
+            "limitations": [],
+            "evidence_ids": []
+          },
+          "observation_id": "jag_observation_a50803d431efdb31ed31149b6947b9aa35e289611a40e6ffc3c3bcf3e4a5ec37",
+          "identifier_strategy": {
+            "strategy": "semantic-content-sha256",
+            "stability": "observation-exact"
+          }
+        }
+      ]
+    },
+    {
+      "node_id": "jag_node_e5c4cf6916dae555a4650423751ea1962a2851328096e9b6780f54a46db35491",
+      "kind": "javascript-module",
+      "identity": {
+        "strategy": "artifact-local-key",
+        "stability": "artifact-version",
+        "artifact_sha256": "634e58c16d9bea08058c1738420165724af8223318fd747a5a0fcdab436ec0e5",
+        "namespace": "source-module",
+        "key": "1f98ecd75716d7ff815b53aca50b2cfaa817a551f2372a09b772623d364ec77a:formats/bold.js"
+      },
+      "observations": [
+        {
+          "label": "formats/bold.js",
+          "source_map_reference": null,
+          "properties": {
+            "semantic_role": "source-module",
+            "path": "formats/bold.js",
+            "container_sha256": "1f98ecd75716d7ff815b53aca50b2cfaa817a551f2372a09b772623d364ec77a",
+            "logical_module_key": "formats/bold.js",
+            "module_format": "esm",
+            "import_relationships": 1,
+            "type_relationships": 0,
+            "export_relationships": 1,
+            "export_names": [
+              "default"
+            ],
+            "type_export_names": [],
+            "omitted_export_names": 0
+          },
+          "evidence": {
+            "authority": "ast-static-analysis",
+            "state": "observed",
+            "confidence": "exact",
+            "artifact": {
+              "available": true,
+              "artifact_id": "art_634e58c16d9bea08058c1738420165724af8223318fd747a5a0fcdab436ec0e5",
+              "sha256": "634e58c16d9bea08058c1738420165724af8223318fd747a5a0fcdab436ec0e5"
+            },
+            "location": {
+              "available": true,
+              "value": {
+                "kind": "source-range",
+                "source": "formats/bold.js",
+                "start": {
+                  "line": 1,
+                  "column": 0
+                },
+                "end": {
+                  "line": 19,
+                  "column": 32
+                }
+              }
+            },
+            "extractor": {
+              "name": "rea-javascript-artifact-reconstruction",
+              "version": "1",
+              "operation": "recover-source-module",
+              "executable_sha256": null
+            },
+            "coverage": {
+              "status": "complete",
+              "truncated": false,
+              "omitted_count": 0,
+              "limits": []
+            },
+            "limitations": [
+              "Cross-function mutation and dynamic property resolution remain unknown.",
+              "Local call, argument, return, and closure relations are static candidates and do not prove runtime invocation.",
+              "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+              "Return sites include only direct callable returns; nested callable returns remain separate.",
+              "Values and aliases were recovered from inert syntax only; no JavaScript was executed."
+            ],
+            "evidence_ids": []
+          },
+          "observation_id": "jag_observation_09f80a0b5e26bc83f9b406dd82774b389dc4426b217c1a8e434011f4a392fb4f",
+          "identifier_strategy": {
+            "strategy": "semantic-content-sha256",
+            "stability": "observation-exact"
+          }
+        }
+      ]
+    }
+  ],
+  "scope_note": "Statische Analyse ausgelieferter Open-Source-JavaScript-Dateien und Source Maps; keine Word-Analyse, keine native Dekompilierung."
+}

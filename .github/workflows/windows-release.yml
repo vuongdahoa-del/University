@@ -1,0 +1,45 @@
+name: Build and publish B&D Word for Windows
+
+on:
+  push:
+    branches: [bd-word-release-v1.0.0]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows-release:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build Windows ZIP and installer
+        run: npm run dist:win
+      - name: Prepare release downloads
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release-assets | Out-Null
+          Copy-Item -LiteralPath 'release/B&D Word Setup 1.0.0.exe' -Destination 'release-assets/BD-Word-Setup-1.0.0.exe'
+          Copy-Item -LiteralPath 'release/B&D Word-1.0.0-win.zip' -Destination 'release-assets/BD-Word-1.0.0-windows-x64.zip'
+          $bdFiles = @('BD-Word-Setup-1.0.0.exe', 'BD-Word-1.0.0-windows-x64.zip')
+          $bdHashes = foreach ($bdFile in $bdFiles) {
+            $bdHash = (Get-FileHash -Algorithm SHA256 -LiteralPath "release-assets/$bdFile").Hash.ToLowerInvariant()
+            "$bdHash  $bdFile"
+          }
+          [System.IO.File]::WriteAllLines("$PWD/release-assets/SHA256SUMS.txt", [string[]]$bdHashes, [System.Text.UTF8Encoding]::new($false))
+      - name: Upload assets and publish existing release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload bd-word-v1.0.0 --repo "$env:GITHUB_REPOSITORY" release-assets/BD-Word-Setup-1.0.0.exe release-assets/BD-Word-1.0.0-windows-x64.zip release-assets/SHA256SUMS.txt
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          gh release edit bd-word-v1.0.0 --repo "$env:GITHUB_REPOSITORY" --draft=false
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

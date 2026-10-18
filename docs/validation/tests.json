@@ -1,0 +1,54 @@
+{
+  "platform": "Linux / Debian 13",
+  "scope": "Browser und echtes Linux-Electron; native Dateidialogauswahl automatisiert vorgegeben",
+  "stats": {
+    "startTime": "2026-10-18T01:56:35.914Z",
+    "duration": 17382.706,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "Browser: Kernformatierung, Historie, Listen, Tabellen und Suche",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "duration_ms": 4447
+        }
+      ]
+    },
+    {
+      "title": "Electron: vollständige Live-Demo mit echtem Speichern, PDF und Wiederöffnen",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "duration_ms": 4598
+        }
+      ]
+    },
+    {
+      "title": "Electron: ungültige Dokumente, Abbruch und Schutz ungespeicherter Änderungen",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "duration_ms": 2893
+        }
+      ]
+    },
+    {
+      "title": "Electron: bereinigter HTML-Import, Links und zwei echte PDF-Seiten",
+      "status": "expected",
+      "runs": [
+        {
+          "status": "passed",
+          "duration_ms": 3245
+        }
+      ]
+    }
+  ]
+}
