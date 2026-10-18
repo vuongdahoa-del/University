@@ -36,3 +36,5 @@ node scripts/smoke-macos.cjs
 Die tatsächlichen Ergebnisse stehen im jeweiligen GitHub-Actions-Lauf **Build and publish B&D Word for macOS**. Bei erfolgreichem Test enthält das Run-Artefakt `macos-smoke-results` eine Ergebnisdatei, einen Screenshot und ein Beispiel-PDF. Fehlgeschlagene Tests verhindern den Upload. Die Dateidialogauswahl wird im Test vorgegeben; der PDF-Inhalt wird hier anhand von Dateikopf und Größe, nicht durch Textextraktion geprüft.
 
 Die App wird nur auf der Architektur des CI-Runners gestartet. Das Vorhandensein beider Architekturen ist keine gesonderte Laufzeitprüfung auf zwei verschiedenen Mac-Modellen. Apple-Notarisierung, physischer Druck und die erste Gatekeeper-Freigabe auf einem persönlichen Mac sind nicht automatisiert geprüft.
+
+Beim ersten Mac-Build beanstandete Apples Signaturwerkzeug Begleitdateien direkt unter `Contents/`. Diese Dateien werden nun über `extraResources` in `Contents/Resources/` abgelegt. Die Signaturprüfung bleibt aktiv; der fehlgeschlagene Build wurde nicht veröffentlicht.

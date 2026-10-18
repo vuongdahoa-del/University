@@ -67,7 +67,21 @@
         "nsis"
       ],
       "icon": "assets/icon.ico",
-      "signAndEditExecutable": false
+      "signAndEditExecutable": false,
+      "extraFiles": [
+        {
+          "from": "assets/demo-bild.png",
+          "to": "Demo/demo-bild.png"
+        },
+        {
+          "from": "docs/LIVE_DEMO.md",
+          "to": "Demo/LIVE_DEMO.md"
+        },
+        {
+          "from": "docs/THIRD_PARTY_NOTICES.txt",
+          "to": "THIRD_PARTY_NOTICES.txt"
+        }
+      ]
     },
     "nsis": {
       "script": "scripts/installer.nsi",
@@ -80,23 +94,23 @@
     },
     "linux": {
       "target": "dir",
-      "icon": "assets/icon.png"
+      "icon": "assets/icon.png",
+      "extraFiles": [
+        {
+          "from": "assets/demo-bild.png",
+          "to": "Demo/demo-bild.png"
+        },
+        {
+          "from": "docs/LIVE_DEMO.md",
+          "to": "Demo/LIVE_DEMO.md"
+        },
+        {
+          "from": "docs/THIRD_PARTY_NOTICES.txt",
+          "to": "THIRD_PARTY_NOTICES.txt"
+        }
+      ]
     },
     "afterPack": "scripts/brand-windows.cjs",
-    "extraFiles": [
-      {
-        "from": "assets/demo-bild.png",
-        "to": "Demo/demo-bild.png"
-      },
-      {
-        "from": "docs/LIVE_DEMO.md",
-        "to": "Demo/LIVE_DEMO.md"
-      },
-      {
-        "from": "docs/THIRD_PARTY_NOTICES.txt",
-        "to": "THIRD_PARTY_NOTICES.txt"
-      }
-    ],
     "mac": {
       "target": [
         "zip"
@@ -108,7 +122,21 @@
       "gatekeeperAssess": false,
       "notarize": false,
       "minimumSystemVersion": "11.0",
-      "artifactName": "BD-Word-${version}-mac-universal.zip"
+      "artifactName": "BD-Word-${version}-mac-universal.zip",
+      "extraResources": [
+        {
+          "from": "assets/demo-bild.png",
+          "to": "Demo/demo-bild.png"
+        },
+        {
+          "from": "docs/LIVE_DEMO.md",
+          "to": "Demo/LIVE_DEMO.md"
+        },
+        {
+          "from": "docs/THIRD_PARTY_NOTICES.txt",
+          "to": "THIRD_PARTY_NOTICES.txt"
+        }
+      ]
     }
   }
 }
